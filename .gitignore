@@ -201,6 +201,7 @@ Temporary Items
 #
 #
 build
+.idea
 
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#C,Qt,C++,macOS,QtCreator

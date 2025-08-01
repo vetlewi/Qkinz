@@ -72,7 +72,7 @@
          <item>
           <widget class="QDoubleSpinBox" name="beamEnergyBox">
            <property name="maximum">
-            <double>1000.000000000000000</double>
+            <double>10000.000000000000000</double>
            </property>
            <property name="value">
             <double>16.000000000000000</double>
