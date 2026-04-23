@@ -286,7 +286,8 @@ void MainWindow::CurveData(const QVector<double> &ex, const QVector<double> &x, 
         } else {
             legend = QString("%1%2)%3").arg(legend).arg("p").arg(outP);
         }
-        ui->plotTab->addPlottable(makeCurve(x, y, QPen(QColor(255,0,0)), legend));
+        makeCurve2(ui->plotTab->addGraph(), x, y, QPen(QColor(255,0,0)), legend);
+        //ui->plotTab->addPlottable(makeCurve(x, y, QPen(QColor(255,0,0)), legend));
         table.setCoeff(coeff, TableMakerHTML::Proton);
         table.setCurve(ex, x, y, TableMakerHTML::Proton);
     } else if (what == Deutron){
@@ -298,7 +299,8 @@ void MainWindow::CurveData(const QVector<double> &ex, const QVector<double> &x, 
         } else {
             legend = QString("%1%2)%3").arg(legend).arg("d").arg(outP);
         }
-        ui->plotTab->addPlottable(makeCurve(x, y, QPen(QColor(0,255,0)), legend));
+        makeCurve2(ui->plotTab->addGraph(), x, y, QPen(QColor(0,255,0)), legend);
+        //ui->plotTab->addPlottable(makeCurve(x, y, QPen(QColor(0,255,0)), legend));
         table.setCoeff(coeff, TableMakerHTML::Deutron);
         table.setCurve(ex, x, y, TableMakerHTML::Deutron);
     } else if (what == Triton){
@@ -310,7 +312,8 @@ void MainWindow::CurveData(const QVector<double> &ex, const QVector<double> &x, 
         } else {
             legend = QString("%1%2)%3").arg(legend).arg("t").arg(outP);
         }
-        ui->plotTab->addPlottable(makeCurve(x, y, QPen(QColor(128,128,128)), legend));
+        makeCurve2(ui->plotTab->addGraph(), x, y, QPen(QColor(128,128,128)), legend);
+        //ui->plotTab->addPlottable(makeCurve(x, y, QPen(QColor(128,128,128)), legend));
         table.setCoeff(coeff, TableMakerHTML::Triton);
         table.setCurve(ex, x, y, TableMakerHTML::Triton);
     } else if (what == Helium3){
@@ -322,7 +325,8 @@ void MainWindow::CurveData(const QVector<double> &ex, const QVector<double> &x, 
         } else {
             legend = QString("%1%2)%3").arg(legend).arg("He-3").arg(outP);
         }
-        ui->plotTab->addPlottable(makeCurve(x, y, QPen(QColor(0,0,255)), legend));
+        makeCurve2(ui->plotTab->addGraph(), x, y, QPen(QColor(0,0,255)), legend);
+        //ui->plotTab->addPlottable(makeCurve(x, y, QPen(QColor(0,0,255)), legend));
         table.setCoeff(coeff, TableMakerHTML::Helium3);
         table.setCurve(ex, x, y, TableMakerHTML::Helium3);
     } else if (what == Alpha){
@@ -334,7 +338,8 @@ void MainWindow::CurveData(const QVector<double> &ex, const QVector<double> &x, 
         } else {
             legend = QString("%1%2)%3").arg(legend).arg("α").arg(outP);
         }
-        ui->plotTab->addPlottable(makeCurve(x, y, QPen(QColor(0,0,0)), legend));
+        makeCurve2(ui->plotTab->addGraph(), x, y, QPen(QColor(0,0,0)), legend);
+        //ui->plotTab->addPlottable(makeCurve(x, y, QPen(QColor(0,0,0)), legend));
         table.setCoeff(coeff, TableMakerHTML::Alpha);
         table.setCurve(ex, x, y, TableMakerHTML::Alpha);
     } else if (what == Other){
@@ -347,7 +352,8 @@ void MainWindow::CurveData(const QVector<double> &ex, const QVector<double> &x, 
         } else {
             legend = QString("%1%2)%3").arg(legend).arg(inP).arg(outP);
         }
-        ui->plotTab->addPlottable(makeCurve(x, y, QPen(QColor(128, 128, 0)), legend));
+        makeCurve2(ui->plotTab->addGraph(), x, y, QPen(QColor(128, 128, 0)), legend);
+        //ui->plotTab->addPlottable(makeCurve(x, y, QPen(QColor(128, 128, 0)), legend));
         table.setCoeff(coeff, TableMakerHTML::Other);
         table.setCurve(ex, x, y, TableMakerHTML::Other);
     }
@@ -360,31 +366,37 @@ void MainWindow::CurveData(const QVector<double> &ex, const QVector<double> &x, 
 void MainWindow::ScatterData(const QVector<double> &x, const QVector<double> &dx, const QVector<double> &y,
                              const QVector<double> &dy, const QVector<double> &ex, const Fragment_t &what)
 {
-    if (what == Proton){
-        ui->plotTab->addPlottable(makeGraph(x, dx, y, dy, QPen(QColor(255,0,0))));
-        ui->plotTab->plottable()->removeFromLegend();
-        table.setData(ex, y, dy, x, dx, TableMakerHTML::Proton);
-    } else if (what == Deutron){
-        ui->plotTab->addPlottable(makeGraph(x, dx, y, dy, QPen(QColor(0,255,0))));
-        ui->plotTab->plottable()->removeFromLegend();
-        table.setData(ex, y, dy, x, dx, TableMakerHTML::Deutron);
-    } else if (what == Triton){
-        ui->plotTab->addPlottable(makeGraph(x, dx, y, dy, QPen(QColor(128,128,128))));
-        ui->plotTab->plottable()->removeFromLegend();
-        table.setData(ex, y, dy, x, dx, TableMakerHTML::Triton);
-    } else if (what == Helium3){
-        ui->plotTab->addPlottable(makeGraph(x, dx, y, dy, QPen(QColor(0,0,255))));
-        ui->plotTab->plottable()->removeFromLegend();
-        table.setData(ex, y, dy, x, dx, TableMakerHTML::Helium3);
-    } else if (what == Alpha){
-        ui->plotTab->addPlottable(makeGraph(x, dx, y, dy, QPen(QColor(0,0,0))));
-        ui->plotTab->plottable()->removeFromLegend();
-        table.setData(ex, y, dy, x, dx, TableMakerHTML::Alpha);
-    } else if (what == Other){
-        ui->plotTab->addPlottable(makeGraph(x, dx, y, dy, QPen(QColor(128, 128, 0))));
-        ui->plotTab->plottable()->removeFromLegend();
-        table.setData(ex, y, dy, x, dx, TableMakerHTML::Other);
+    QPen pen;
+    TableMakerHTML::Particle_t particle;
+    switch ( what ) {
+        case Proton :
+            pen = QPen(QColor(255,0,0));
+            particle = TableMakerHTML::Proton;
+            break;
+        case Deutron :
+            pen = QPen(QColor(0,255,0));
+            particle = TableMakerHTML::Deutron;
+            break;
+        case Triton :
+            pen = QPen(QColor(128,128,128));
+            particle = TableMakerHTML::Triton;
+            break;
+        case Helium3 :
+            pen = QPen(QColor(128,128,128));
+            particle = TableMakerHTML::Helium3;
+            break;
+        case Alpha :
+            pen = QPen(QColor(0,0,0));
+            particle = TableMakerHTML::Alpha;
+            break;
+        case Other :
+        default :
+            pen = QPen(QColor(128, 128, 0));
+            particle = TableMakerHTML::Other;
+            break;
     }
+    makeGraph2(ui->plotTab->addGraph(), x, dx, y, dy, pen);
+    table.setData(ex, y, dy, x, dx, particle);
     ui->plotTab->replot();
     ui->plotTab->rescaleAxes();
     ui->plotTab->show();
@@ -478,18 +490,53 @@ QCPCurve *MainWindow::makeCurve(QVector<double> x, QVector<double> y, QPen pen, 
     return nCurve;
 }
 
+void MainWindow::makeCurve2(QCPGraph* graph, QVector<double> x, QVector<double> y, QPen pen, QString label)
+{
+
+    graph->setName(label);
+    graph->setPen(pen);
+    graph->setData(x, y, true);
+    graph->setLineStyle(QCPGraph::lsLine);
+}
+
+
 QCPGraph *MainWindow::makeGraph(QVector<double> x, QVector<double> dx, QVector<double> y, QVector<double> dy, QPen pen)
 {
     QCPGraph *nGraph = new QCPGraph(ui->plotTab->xAxis, ui->plotTab->yAxis);
 
     nGraph->removeFromLegend();
-    nGraph->setDataBothError(x, y, dx, dy);
+    //nGraph->setDataBothError(x, y, dx, dy);
     nGraph->setPen(pen);
     nGraph->setLineStyle(QCPGraph::lsNone);
     nGraph->setScatterStyle(QCPScatterStyle::ssDisc);
-    nGraph->setErrorType(QCPGraph::etBoth);
+    //nGraph->setErrorType(QCPGraph::etBoth);
 
     return nGraph;
+}
+
+void MainWindow::makeGraph2(QCPGraph* graph, QVector<double> x, QVector<double> dx, QVector<double> y, QVector<double> dy, QPen pen)
+{
+    QCPErrorBars* error_bars_x = new QCPErrorBars(ui->plotTab->xAxis, ui->plotTab->yAxis);
+    QCPErrorBars* error_bars_y = new QCPErrorBars(ui->plotTab->xAxis, ui->plotTab->yAxis);
+    error_bars_x->removeFromLegend();
+    error_bars_y->removeFromLegend();
+
+    error_bars_x->setErrorType(QCPErrorBars::etKeyError);
+    error_bars_y->setErrorType(QCPErrorBars::etValueError);
+    error_bars_x->setData(dx);
+    error_bars_y->setData(dy);
+    error_bars_x->setPen(pen);
+    error_bars_y->setPen(pen);
+    error_bars_x->setAntialiased(false);
+    error_bars_y->setAntialiased(false);
+    error_bars_x->setDataPlottable(graph);
+    error_bars_y->setDataPlottable(graph);
+
+    graph->removeFromLegend();
+    graph->setData(x, y);
+    graph->setPen(pen);
+    graph->setLineStyle(QCPGraph::lsNone);
+    graph->setScatterStyle(QCPScatterStyle::ssDisc);
 }
 
 void MainWindow::on_actionExport_plot_triggered()
@@ -585,7 +632,7 @@ void MainWindow::on_actionAbout_triggered()
     QFile file(":/text/about.html");
     file.open(QIODevice::ReadOnly | QIODevice::Text);
     QTextStream ts(&file);
-    ts.setCodec("UTF-8");
+    ts.setEncoding(QStringConverter::Utf8);
 
     QMessageBox::about(this, tr("About Qkinz"), ts.readAll());
     file.close();
@@ -597,7 +644,8 @@ void MainWindow::on_actionAbout_QCustomPlot_triggered()
     QFile file(":/text/about_qcustomplot.html");
     file.open(QIODevice::ReadOnly|QIODevice::Text);
     QTextStream ts(&file);
-    ts.setCodec("UTF-8");
+    //ts.setCodec("UTF-8");
+    ts.setEncoding(QStringConverter::Utf8);
     QMessageBox::about(this, tr("About QCustomPlot 1.30"), ts.readAll());
     file.close();
 }

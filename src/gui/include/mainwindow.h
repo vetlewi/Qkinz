@@ -205,6 +205,13 @@ private:
                         QVector<double> y,  /*!< y-values of the curve. */
                         QPen pen,           /*!< Color of the plot.     */
                         QString label       /*!< Label of the curve.    */);
+
+    void makeCurve2(QCPGraph* graph,
+                    QVector<double> x,  /*!< x-values of the curve. */
+                    QVector<double> y,  /*!< y-values of the curve. */
+                    QPen pen,           /*!< Color of the plot.     */
+                    QString label       /*!< Label of the curve.    */);
+
     //! Create a QCPGraph from data points.
     /*! \return a scatter graph with errorbars.
      */
@@ -213,6 +220,13 @@ private:
                         QVector<double> y,  /*!< y-values.              */
                         QVector<double> dy, /*!< Error of the y-values. */
                         QPen pen            /*!< Color of the points.   */);
+
+    void makeGraph2(QCPGraph* graph,
+                         QVector<double> x,  /*!< x-values.              */
+                         QVector<double> dx, /*!< Error of the x-values. */
+                         QVector<double> y,  /*!< y-values.              */
+                         QVector<double> dy, /*!< Error of the y-values. */
+                         QPen pen            /*!< Color of the points.   */);
 
     QStringList batchFiles;
     int currentBatch;
