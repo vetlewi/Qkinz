@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.21.1)
 project(Qkinz VERSION 1.5.2 LANGUAGES C CXX)
 
+
 find_package(Threads REQUIRED)
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets PrintSupport)
 set(CMAKE_AUTOMOC ON)
