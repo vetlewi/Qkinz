@@ -8,7 +8,6 @@
 #include <iostream>
 #include <cmath>
 
-#include <QWebEngineView>
 #include <QFile>
 #include <QFileDialog>
 
@@ -518,9 +517,7 @@ void MainWindow::on_actionExport_table_triggered()
     QFileDialog *SaveTabDialog = new QFileDialog(this);
 
     QString FilePath = SaveTabDialog->getSaveFileName(this, "Save table", QDir::homePath(), Filters, &DefaultFilter);
-    if (FilePath.endsWith("pdf", Qt::CaseInsensitive)){
-        ui->webView->page()->printToPdf(FilePath);
-    } else if (FilePath.endsWith("html", Qt::CaseInsensitive)){
+    if (FilePath.endsWith("html", Qt::CaseInsensitive)){
         QString htmlCode = table.getHTMLCode();
         QFile file(FilePath);
         if (file.open(QIODevice::WriteOnly|QIODevice::Text)){

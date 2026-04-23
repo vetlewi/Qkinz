@@ -728,12 +728,7 @@
          </attribute>
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="0" column="0">
-           <widget class="QWebEngineView" name="webView">
-            <property name="url">
-             <url>
-              <string>about:blank</string>
-             </url>
-            </property>
+           <widget class="QTextBrowser" name="webView">
            </widget>
           </item>
          </layout>
@@ -859,11 +854,6 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
-  <customwidget>
-   <class>QWebEngineView</class>
-   <extends>QWidget</extends>
-   <header location="global">QtWebEngineWidgets/QWebEngineView</header>
-  </customwidget>
   <customwidget>
    <class>QCustomPlot</class>
    <extends>QWidget</extends>
