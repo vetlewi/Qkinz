@@ -27,7 +27,7 @@ jobs:
           key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
       - name: Install Qt 5
-        run: brew install qt@5
+        run: brew install qt
 
       - name: configure
         run: cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Debug
