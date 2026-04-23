@@ -26,6 +26,12 @@ jobs:
           path: "**/cpm_modules"
           key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
+      - name: Update
+        run: apt update
+
+      - name: Upgrade
+        run: apt upgrade
+
       - name: Install Qt
         run: sudo apt install -y qt6-base-dev cmake
 

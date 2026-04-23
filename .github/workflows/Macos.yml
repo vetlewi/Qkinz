@@ -26,7 +26,7 @@ jobs:
           path: "**/cpm_modules"
           key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
-      - name: Install Qt 5
+      - name: Install Qt
         run: brew install qt
 
       - name: configure
