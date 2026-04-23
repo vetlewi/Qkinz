@@ -4,10 +4,10 @@ project(Qkinz VERSION 1.4.2 LANGUAGES C CXX)
 # Comment out this block if you install Qt some other way than homebrew
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     list(APPEND CMAKE_PREFIX_PATH "/opt/homebrew/opt/qt@5")
-endif() 
+endif()
 
 find_package(Threads REQUIRED)
-find_package(Qt5 REQUIRED COMPONENTS Core Widgets WebEngine WebEngineCore WebEngineWidgets)
+find_package(Qt5 REQUIRED COMPONENTS Core Widgets PrintSupport)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
@@ -117,9 +117,10 @@ target_include_directories(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
         Qt5::Widgets
-        Qt5::WebEngineCore
-        Qt5::WebEngine
-        Qt5::WebEngineWidgets
+        Qt5::PrintSupport
+        #Qt5::WebEngineCore
+        #Qt5::WebEngine
+        #Qt5::WebEngineWidgets
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
