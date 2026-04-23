@@ -1,30 +1,11 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.21.1)
 project(Qkinz VERSION 1.5.2 LANGUAGES C CXX)
-
-# Comment out this block if you install Qt some other way than homebrew
-if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    list(APPEND CMAKE_PREFIX_PATH "/opt/homebrew/opt/qt@5")
-    list(APPEND CMAKE_PREFIX_PATH "/opt/homebrew/opt/qt")
-endif()
 
 find_package(Threads REQUIRED)
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets PrintSupport)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
-
-if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    #set(CMAKE_OSX_ARCHITECTURES "x86_64;arm64")
-endif()
-
-#add_library(QCustomPlot ${CMAKE_CURRENT_SOURCE_DIR}/third_party/QCustomPlot/src/qcustomplot.cpp)
-#target_include_directories(QCustomPlot
-#    PUBLIC
-#        ${CMAKE_CURRENT_SOURCE_DIR}/third_party/QCustomPlot/include
-#    PRIVATE
-#        ${CMAKE_CURRENT_SOURCE_DIR}/third_party/QCustomPlot/include
-#)
-#target_link_libraries(QCustomPlot PUBLIC Qt::Widgets Qt::PrintSupport)
 
 # ---- Add source files ----
 set(headers
@@ -109,7 +90,7 @@ set(sources
 
 qt6_add_resources(sources resources/resorces.qrc)
 
-add_executable(${PROJECT_NAME} ${headers} ${sources})
+qt_add_executable(${PROJECT_NAME} ${headers} ${sources})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20)
 
@@ -128,12 +109,8 @@ target_link_libraries(${PROJECT_NAME}
     PUBLIC
         Qt::Widgets
         Qt::PrintSupport
-        #Qt5::WebEngineCore
-        #Qt5::WebEngine
-        #Qt5::WebEngineWidgets
 )
 
-set_target_properties(${PROJECT_NAME} PROPERTIES
-        WIN32_EXECUTABLE ON
-        MACOSX_BUNDLE ON
-)
+if (APPLE)
+    set_target_properties(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE TRUE)
+endif()
